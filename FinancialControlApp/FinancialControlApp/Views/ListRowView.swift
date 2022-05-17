@@ -17,7 +17,7 @@ struct ListRowView: View {
             HStack{
                 Text(financialIssue.description)
                 Spacer()
-                Text("$ \(financialIssue.value, specifier: "%.2f")")
+                Text("\(financialIssue.value, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
             }
                 .foregroundColor(Color("PositiveTextColor"))
                 .padding(15.0)
@@ -27,7 +27,7 @@ struct ListRowView: View {
             HStack{
                 Text(financialIssue.description)
                 Spacer()
-                Text("$ \(financialIssue.value, specifier: "%.2f")")
+                Text("\(financialIssue.value, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
             }
                 .foregroundColor(Color("NegativeTextColor"))
                 .padding(15.0)
@@ -65,7 +65,7 @@ struct TotalListRowView: View{
             HStack{
                 Text("Total: ")
                 Spacer()
-                Text("$ \(total, specifier: "%.2f")")
+                Text("\(total, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
             }
             .foregroundColor(Color("PositiveTextColor"))
             .padding(15.0)

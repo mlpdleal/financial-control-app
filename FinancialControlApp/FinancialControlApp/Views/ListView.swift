@@ -15,7 +15,6 @@ struct ListView: View {
     
     var body: some View {
         
-        
             ZStack(){
                 List{
                     HeaderListRowView()
