@@ -11,13 +11,17 @@ struct ListRowView: View {
     
     let financialIssue: FinancialIssueModel
     
+    let currencyCode = Locale.current.currencyCode ?? "USD"
+    
     var body: some View {
         
         if financialIssue.value > 0 {
             HStack{
+               
                 Text(financialIssue.description)
                 Spacer()
-                Text("\(financialIssue.value, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
+                Text("\(financialIssue.value, format: .currency(code: currencyCode))")
+                
             }
                 .foregroundColor(Color("PositiveTextColor"))
                 .padding(15.0)
@@ -27,7 +31,7 @@ struct ListRowView: View {
             HStack{
                 Text(financialIssue.description)
                 Spacer()
-                Text("\(financialIssue.value, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
+                Text("\(financialIssue.value, format: .currency(code: currencyCode))")
             }
                 .foregroundColor(Color("NegativeTextColor"))
                 .padding(15.0)
@@ -58,6 +62,7 @@ struct HeaderListRowView: View{
 struct TotalListRowView: View{
     
     @Binding var total: Double
+    let currencyCode = Locale.current.currencyCode ?? "USD"
     
     var body: some View {
         
@@ -65,7 +70,7 @@ struct TotalListRowView: View{
             HStack{
                 Text("Total: ")
                 Spacer()
-                Text("\(total, format: .currency(code: Locale.current.currencyCode ?? "USD"))")
+                Text("\(total, format: .currency(code: currencyCode))")
             }
             .foregroundColor(Color("PositiveTextColor"))
             .padding(15.0)
@@ -74,7 +79,7 @@ struct TotalListRowView: View{
             HStack{
                 Text("Total: ")
                 Spacer()
-                Text("$ \(total, specifier: "%.2f")")
+                Text("\(total, format: .currency(code: currencyCode))")
             }
             .foregroundColor(Color("NegativeTextColor"))
             .padding(15.0)
@@ -87,7 +92,7 @@ struct TotalListRowView: View{
 
 struct ListRowView_Previews: PreviewProvider {
     
-    static var item1 = FinancialIssueModel(description: "Salary", value: 25.00)
+    static var item1 = FinancialIssueModel(description: "Salary", value: 250000.00)
     static var item2 = FinancialIssueModel(description: "food", value: -35.00)
     static var total = Binding.constant(50.00)
     

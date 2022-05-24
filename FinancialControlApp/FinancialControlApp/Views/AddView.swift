@@ -21,14 +21,13 @@ struct AddView: View {
     var body: some View {
         
         ScrollView{
-            VStack{
+            Section {
                 TextField("Description: ", text: $textFieldDescription)
                     .padding(.horizontal)
                     .frame(height: 55)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 
-     
                     TextField("Value: ", text: $textFieldValue)
                     .keyboardType(.decimalPad)
                         .padding(.horizontal)
@@ -50,6 +49,8 @@ struct AddView: View {
                         .cornerRadius(10)
                 }
                 )
+            } header: {
+                Text("Issue Information")
             }
                 .padding(14)
         }
