@@ -11,13 +11,18 @@ struct ListRowView: View {
     
     let financialIssue: FinancialIssueModel
     
+    let currency = Locale.current.currencyCode ?? "USD"
+        
     var body: some View {
         
         if financialIssue.value > 0 {
             HStack{
+                Text("\(financialIssue.dateTime.formatted(date: .abbreviated, time: .omitted))")
+                Spacer()
                 Text(financialIssue.description)
                 Spacer()
-                Text("$ \(financialIssue.value, specifier: "%.2f")")
+                Spacer()
+                Text("\(financialIssue.value, format: .currency(code: currency))")
             }
                 .foregroundColor(Color("PositiveTextColor"))
                 .padding(15.0)
@@ -25,9 +30,12 @@ struct ListRowView: View {
                 .font(.caption)
         } else {
             HStack{
+                Text("\(financialIssue.dateTime.formatted(date: .abbreviated, time: .omitted))")
+                Spacer()
                 Text(financialIssue.description)
                 Spacer()
-                Text("$ \(financialIssue.value, specifier: "%.2f")")
+                Spacer()
+                Text("\(financialIssue.value, format: .currency(code: currency))")
             }
                 .foregroundColor(Color("NegativeTextColor"))
                 .padding(15.0)
@@ -42,6 +50,8 @@ struct HeaderListRowView: View{
     
     var body: some View {
         HStack{
+            Text("Date")
+            Spacer()
             Text("Description")
             Spacer()
             Text("Value")
@@ -59,22 +69,25 @@ struct TotalListRowView: View{
     
     @Binding var total: Double
     
+    let currency = Locale.current.currencyCode ?? "USD"
+    
     var body: some View {
         
         if total > 0{
             HStack{
                 Text("Total: ")
                 Spacer()
-                Text("$ \(total, specifier: "%.2f")")
+                Text("\(total, format: .currency(code: currency))")
             }
             .foregroundColor(Color("PositiveTextColor"))
             .padding(15.0)
             .frame(maxWidth: .infinity)
         } else {
             HStack{
+
                 Text("Total: ")
                 Spacer()
-                Text("$ \(total, specifier: "%.2f")")
+                Text("\(total, format: .currency(code: currency))")
             }
             .foregroundColor(Color("NegativeTextColor"))
             .padding(15.0)
@@ -87,7 +100,7 @@ struct TotalListRowView: View{
 
 struct ListRowView_Previews: PreviewProvider {
     
-    static var item1 = FinancialIssueModel(description: "Salary", value: 25.00)
+    static var item1 = FinancialIssueModel(description: "Salary", value: 250.00)
     static var item2 = FinancialIssueModel(description: "food", value: -35.00)
     static var total = Binding.constant(50.00)
     

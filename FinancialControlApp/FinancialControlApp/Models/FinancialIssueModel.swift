@@ -12,11 +12,13 @@ struct FinancialIssueModel: Identifiable, Codable {
     let id: String
     let description: String
     let value: Double
+    let dateTime: Date
     
     init(id: String = UUID().uuidString, description: String, value: Double){
         self.id = id
         self.description = description
         self.value = value
+        self.dateTime = Date.now
     }
     
 }
