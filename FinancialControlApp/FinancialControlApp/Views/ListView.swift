@@ -16,15 +16,19 @@ struct ListView: View {
     var body: some View {
         
         
-            ZStack(){
+            ZStack{
                 List{
-                    HeaderListRowView()
-                    ForEach(listViewModel.items) { item in
-                        ListRowView(financialIssue: item)
-                
+                    Section{
+                        ForEach(listViewModel.items) { item in
+                            ListRowView(financialIssue: item)
+                            
+                        }
+                        .onDelete(perform: listViewModel.deleteItem)
+                        TotalListRowView(total: Binding.constant(listViewModel.addItemsValues()))
+                    } header: {
+                        HeaderListRowView()
                     }
-                    .onDelete(perform: listViewModel.deleteItem)
-                    TotalListRowView(total: Binding.constant(listViewModel.addItemsValues()))
+                    
                 }
                 .listStyle(PlainListStyle())
             }.navigationTitle("My Finances 💰")
